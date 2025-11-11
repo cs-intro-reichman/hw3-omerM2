@@ -22,46 +22,68 @@ public class Algebra {
 		System.out.println(sqrt(263169));
    		System.out.println(sqrt(76123));
 	}  
-
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sumPlus = 0;
+		for(int i = 0; i < x1 ; i ++){
+			sumPlus++;
+		}
+		for(int i = 0; i < x2 ; i ++){
+			sumPlus++;
+		}
+		return sumPlus ;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sumMinus = x1;
+		for(int i = 0; i < x2; i++){
+			sumMinus--;
+		}
+		return sumMinus;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sumTimes = 0;
+		for(int i = 0 ; i < x2; i++){
+			sumTimes = plus(sumTimes, x1);
+		}
+		return sumTimes;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int sumPow = 1;
+		for(int i = 0 ; i < n ; i++ ){
+			sumPow = times(sumPow, x);
+		}
+		return sumPow;
 	}
 
-	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sumDiv = 0;
+		while (x1>0) {
+			x1 = minus(x1, x2);
+			sumDiv++;
+
+		}
+		return sumDiv;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}	
+			
+		return minus(x1,times(div(x1,x2),x2));
+
+		}
+		
 
 	// Returns the integer part of sqrt(x) 
-	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
-	}	  	  
+public static int sqrt(int x) {
+    int r = 0;
+    while ((long)(r + 1) * (r + 1) <= x) r++;
+    return r; // floor(sqrt(x))
+}
+  	  
 }
