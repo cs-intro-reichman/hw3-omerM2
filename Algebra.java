@@ -83,7 +83,7 @@ public class Algebra {
 public static int sqrt(int x) {
     int r = 0;
     while ((long)(r + 1) * (r + 1) <= x) r++;
-    return r; // floor(sqrt(x))
+    return r;
 }
   	  
 }
