@@ -22,46 +22,181 @@ public class Algebra {
 		System.out.println(sqrt(263169));
    		System.out.println(sqrt(76123));
 	}  
-
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+		int a = x1;
+        int b = x2;
+
+        if (b > 0) {
+            while (b != 0) {
+                a++;
+                b--;
+            }
+        } else {
+            while (b != 0) {
+                a--;
+                b++;
+            }
+        }
+        return a;
+    }
+
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+        int t = x2;
+        int neg = 0;
+
+        if (t > 0) {
+            while (t != 0) {
+                neg--;
+                t--;
+            }
+        } else {
+            while (t != 0) {
+                neg++;
+                t++;
+            }
+        }
+
+        return plus(x1, neg);
+    }
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+        boolean neg = false;
+
+        int a = x1;
+        int b = x2;
+
+        // abs(a)
+        if (a < 0) {
+            neg = !neg;
+            int t = a;
+            a = 0;
+            while (t != 0) {
+                a++;
+                t++;
+            }
+        }
+
+        // abs(b)
+        if (b < 0) {
+            neg = !neg;
+            int t = b;
+            b = 0;
+            while (t != 0) {
+                b++;
+                t++;
+            }
+        }
+
+        int res = 0;
+        int i = 0;
+        while (i < b) {
+            res = plus(res, a);
+            i++;
+        }
+
+        if (neg) {
+            int t = res;
+            res = 0;
+            if (t > 0) {
+                while (t != 0) {
+                    res--;
+                    t--;
+                }
+            } else {
+                while (t != 0) {
+                    res++;
+                    t++;
+                }
+            }
+        }
+
+        return res;
+    }
+
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int sumPow = 1;
+		for(int i = 0 ; i < n ; i++ ){
+			sumPow = times(sumPow, x);
+		}
+		return sumPow;
 	}
 
-	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+boolean neg = false;
 
-	// Returns x1 % x2
+        int a = x1;
+        int b = x2;
+
+        // abs(a)
+        if (a < 0) {
+            neg = !neg;
+            int t = a;
+            a = 0;
+            while (t != 0) {
+                a++;
+                t++;
+            }
+        }
+
+        // abs(b)
+        if (b < 0) {
+            neg = !neg;
+            int t = b;
+            b = 0;
+            while (t != 0) {
+                b++;
+                t++;
+            }
+        }
+
+        int q = 0;
+        int rem = a;
+
+        while (rem >= b) {
+            rem = minus(rem, b);
+            q++;
+        }
+
+        if (neg) {
+            int t = q;
+            q = 0;
+            while (t != 0) {
+                q--;
+                t--;
+            }
+        }
+
+        return q;
+    }
+
+
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}	
+			
+		return minus(x1,times(div(x1,x2),x2));
+
+		}
+		
 
 	// Returns the integer part of sqrt(x) 
-	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
-	}	  	  
+public static int sqrt(int x) {
+ 		int count = 0;
+        int odd = 1;
+        int acc = 0;
+
+        while (true) {
+            acc = plus(acc, odd);
+            if (acc > x) break;
+            count++;
+            odd = plus(odd, 2);
+        }
+
+        return count;
+}
+  	  
 }
