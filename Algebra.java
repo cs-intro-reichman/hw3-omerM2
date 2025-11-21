@@ -24,33 +24,99 @@ public class Algebra {
 	}  
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		int sumPlus = 0;
-		for(int i = 0; i < x1 ; i ++){
-			sumPlus++;
-		}
-		for(int i = 0; i < x2 ; i ++){
-			sumPlus++;
-		}
-		return sumPlus ;
-	}
+		int a = x1;
+        int b = x2;
+
+        if (b > 0) {
+            while (b != 0) {
+                a++;
+                b--;
+            }
+        } else {
+            while (b != 0) {
+                a--;
+                b++;
+            }
+        }
+        return a;
+    }
+
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		int sumMinus = x1;
-		for(int i = 0; i < x2; i++){
-			sumMinus--;
-		}
-		return sumMinus;
-	}
+        int t = x2;
+        int neg = 0;
+
+        if (t > 0) {
+            while (t != 0) {
+                neg--;
+                t--;
+            }
+        } else {
+            while (t != 0) {
+                neg++;
+                t++;
+            }
+        }
+
+        return plus(x1, neg);
+    }
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		int sumTimes = 0;
-		for(int i = 0 ; i < x2; i++){
-			sumTimes = plus(sumTimes, x1);
-		}
-		return sumTimes;
-	}
+        boolean neg = false;
+
+        int a = x1;
+        int b = x2;
+
+        // abs(a)
+        if (a < 0) {
+            neg = !neg;
+            int t = a;
+            a = 0;
+            while (t != 0) {
+                a++;
+                t++;
+            }
+        }
+
+        // abs(b)
+        if (b < 0) {
+            neg = !neg;
+            int t = b;
+            b = 0;
+            while (t != 0) {
+                b++;
+                t++;
+            }
+        }
+
+        int res = 0;
+        int i = 0;
+        while (i < b) {
+            res = plus(res, a);
+            i++;
+        }
+
+        if (neg) {
+            int t = res;
+            res = 0;
+            if (t > 0) {
+                while (t != 0) {
+                    res--;
+                    t--;
+                }
+            } else {
+                while (t != 0) {
+                    res++;
+                    t++;
+                }
+            }
+        }
+
+        return res;
+    }
+
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
@@ -62,14 +128,53 @@ public class Algebra {
 	}
 
 	public static int div(int x1, int x2) {
-		int sumDiv = 0;
-		while (x1>0) {
-			x1 = minus(x1, x2);
-			sumDiv++;
+boolean neg = false;
 
-		}
-		return sumDiv;
-	}
+        int a = x1;
+        int b = x2;
+
+        // abs(a)
+        if (a < 0) {
+            neg = !neg;
+            int t = a;
+            a = 0;
+            while (t != 0) {
+                a++;
+                t++;
+            }
+        }
+
+        // abs(b)
+        if (b < 0) {
+            neg = !neg;
+            int t = b;
+            b = 0;
+            while (t != 0) {
+                b++;
+                t++;
+            }
+        }
+
+        int q = 0;
+        int rem = a;
+
+        while (rem >= b) {
+            rem = minus(rem, b);
+            q++;
+        }
+
+        if (neg) {
+            int t = q;
+            q = 0;
+            while (t != 0) {
+                q--;
+                t--;
+            }
+        }
+
+        return q;
+    }
+
 
 	public static int mod(int x1, int x2) {
 			
@@ -80,9 +185,18 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 public static int sqrt(int x) {
-    int r = 0;
-    while ((long)(r + 1) * (r + 1) <= x) r++;
-    return r;
+ 		int count = 0;
+        int odd = 1;
+        int acc = 0;
+
+        while (true) {
+            acc = plus(acc, odd);
+            if (acc > x) break;
+            count++;
+            odd = plus(odd, 2);
+        }
+
+        return count;
 }
   	  
 }
