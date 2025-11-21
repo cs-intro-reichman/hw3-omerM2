@@ -71,7 +71,6 @@ public class Algebra {
 		return sumDiv;
 	}
 
-	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 			
 		return minus(x1,times(div(x1,x2),x2));
